@@ -44,5 +44,4 @@ public class FriendFinder {
 		
 		return 0;
 	}
-
 }
