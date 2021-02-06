@@ -49,67 +49,15 @@ public class CheckWriter {
 	 * @return
 	 */
 	public String convertWords(double data) {
-		int[] vals = new int[] {1000000, 1000, 100, 10, 1};
-		StringBuilder holder = new StringBuilder();
-		boolean hasTeen = false;
-		for (int val : vals) {
-			int numItem = (int)data / val;
-			if (numItem == 0) continue;
-				
-			if (val < 100) {
-				if (val == 10 && numItem == 1) hasTeen = true;
-				else {
-					if (hasTeen) holder.append(numberMap.get(val * numItem + 10)).append(" ");
-					else holder.append(numberMap.get(val * numItem)).append(" ");
-				}
-			} else {
-				holder.append(numberMap.get(numItem)).append(" ");
-				holder.append(numberMap.get(val)).append(" ");
-			}
-			
-			data = data - (numItem * val);
-		}
-		
-		holder.append("dollars ");
-		if (data > 0 && data < 1) holder.append("and ").append((int)(data * 100)).append("/100");
 
-		return holder.toString().substring(0, 1).toUpperCase() + holder.toString().substring(1);
+		return "";
 	}
 
 	/**
 	 * Create a numbers map to convert ints to words
 	 */
 	protected void loadMap() {
-		numberMap.put(1, "one");
-		numberMap.put(2, "two");
-		numberMap.put(3, "three");
-		numberMap.put(4, "four");
-		numberMap.put(5, "five");
-		numberMap.put(6, "six");
-		numberMap.put(7, "seven");
-		numberMap.put(8, "eight");
-		numberMap.put(9, "nine");
-		numberMap.put(10, "ten");
-		numberMap.put(11, "eleven");
-		numberMap.put(12, "twelve");
-		numberMap.put(13, "thirteen");
-		numberMap.put(14, "fourteen");
-		numberMap.put(15, "fifteen");
-		numberMap.put(16, "sixteen");
-		numberMap.put(17, "seventeen");
-		numberMap.put(18, "eighteen");
-		numberMap.put(19, "nineteen");
-		numberMap.put(20, "twenty");
-		numberMap.put(30, "thirty");
-		numberMap.put(40, "forty");
-		numberMap.put(50, "fifty");
-		numberMap.put(60, "sixty");
-		numberMap.put(70, "seventy");
-		numberMap.put(80, "eighty");
-		numberMap.put(90, "ninety");
-		numberMap.put(100, "hundred");
-		numberMap.put(1000, "thousand");
-		numberMap.put(1000000, "million");
+		
 	}
 
 }
