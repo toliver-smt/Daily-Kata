@@ -34,6 +34,23 @@ public class IPAddress {
 	 * @return
 	 */
 	public int numberHosts(String ipStart, String ipEnd) {
-		return 0;
+        String[] ipStartString = ipStart.split("\\.");
+        String[] ipEndString = ipEnd.split("\\.");
+        
+        int diff = 0;
+        int result = 0;
+        int arrLen = ipStartString.length;
+        
+        for(int i=0; i<arrLen; i++) {
+            diff = Math.abs(Integer.parseInt(ipEndString[i]) - Integer.parseInt(ipStartString[i]));
+            if(result == 0) {
+                result = diff;
+            }
+            else {
+                result = result * (256-diff);
+            }
+        }
+        
+        return result;
 	}
 }
