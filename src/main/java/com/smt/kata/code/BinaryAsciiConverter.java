@@ -1,7 +1,5 @@
 package com.smt.kata.code;
 
-import org.apache.commons.lang3.StringUtils;
-
 /****************************************************************************
  * <b>Title</b>: BinaryAsciiConverter.java
  * <b>Project</b>: SMT-Kata
