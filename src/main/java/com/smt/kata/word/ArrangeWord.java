@@ -22,7 +22,7 @@ public class ArrangeWord {
 	/**
 	 * Holds the results of the permutation
 	 */
-	private List<String> items;
+	private static List<String> items;
 
 	/**
 	 * 
@@ -36,9 +36,31 @@ public class ArrangeWord {
 	 * @param word
 	 * @return
 	 */
-	public List<String> getPermutations(String word) {
-		items = new ArrayList<>();
-		
-		return items;
-	}
+    public List<String> getPermutations(String word) {
+        items = new ArrayList<>();
+        
+        if(word == null || word.isEmpty()) {
+            return items;
+        }
+        
+        //Call recursive function
+        permutation("", word);
+        
+        return items;
+    }
+    
+    private static void permutation(String permutation, String word) {
+        //Check the base case
+        if (word.isEmpty()) {
+            items.add(permutation + word);
+
+        } else {
+            //iterate through all of the characters
+            for (int i = 0; i < word.length(); i++) {
+                //Call recursive function with sub strings
+                permutation(permutation + word.charAt(i), word.substring(0, i) + word.substring(i + 1, word.length()));
+            }
+        }
+
+    }
 }

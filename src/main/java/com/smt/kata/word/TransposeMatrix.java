@@ -38,6 +38,6 @@ public class TransposeMatrix {
 	 * @return
 	 */
 	public String parse(String[][] matrix) {
-		return null;
+		return matrix[0][0];
 	}
 }
