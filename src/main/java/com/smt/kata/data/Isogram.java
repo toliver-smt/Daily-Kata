@@ -27,6 +27,7 @@ public class Isogram {
 	 * @return true if an isogram.  False if empty or not an isogram
 	 */
 	public boolean isValidIsogram(String phrase) {
-		return phrase == null;
-	}
+        
+        return phrase == null;
+    }
 }
