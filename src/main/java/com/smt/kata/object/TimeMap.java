@@ -38,7 +38,7 @@ package com.smt.kata.object;
  * d.get(1, 0) # get key 1 at time 0 should be 2
  * 
  * For this Kata, you may not use ANY imports in the collections (java.util.*), 
- * EXCEPT you may java.util.Arrays.
+ * EXCEPT you may java.util.Arrays.  You may NOT use inner classes for this Kata
  * 
  * <b>Copyright:</b> Copyright (c) 2021
  * <b>Company:</b> Silicon Mountain Technologies
