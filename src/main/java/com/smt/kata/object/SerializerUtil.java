@@ -28,6 +28,7 @@ public class SerializerUtil {
 	 * Determines if the passed object instance can be serialized
 	 * @param o Object to validate
 	 * @return True if the object can be successfully serialized and de-serialized
+	 * and is equal to the original object
 	 */
 	public boolean isSerializable(Object o) {
 		return o == null;
