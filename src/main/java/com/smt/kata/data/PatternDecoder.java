@@ -22,8 +22,7 @@ import java.util.List;
  * @updates:
  ****************************************************************************/
 public class PatternDecoder {
-	public static String [] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
-
+	
 	/**
 	 * Decodes the given pattern
 	 * 
@@ -31,84 +30,6 @@ public class PatternDecoder {
 	 * @return Collection of the matching patterns
 	 */
 	public List<String> decodePattern(String pattern) {
-		System.out.println("");
-		List<String> patterns = new ArrayList<>();
-
-		//Remove bad test cases.
-		if(pattern == null || pattern.indexOf("0") > -1 || pattern.matches("\\w*[a-zA-Z]\\w*")) {
-			return patterns;
-		}
-
-		///If a single character, parse and return
-		if(pattern.length() == 1) {
-			patterns.add(letters[Integer.parseInt(pattern) - 1]);
-		} else {
-			///Parse and test character 1 in the pattern
-			char [] chars = pattern.toCharArray();
-			String startletter = letters[Integer.parseInt(chars[0] + "") - 1];
-			///Calculate the remainder after the start char.
-			String remainder = pattern.substring(1, pattern.length());
-
-			//If we have a valid remainder, recursively call
-			if(remainder != null && remainder.length() > 0) {
-				patterns.addAll(checkPattern(startletter, remainder));
-			}
-
-			///Check for 2 character split.
-			startletter = pattern.substring(0, 2);
-
-			//Check if the 2 character is a valid letter.
-			if(Integer.parseInt(startletter) < 27) {
-				startletter = letters[Integer.parseInt(startletter) - 1];
-				remainder = pattern.substring(2);
-
-				///Check and test remainders again recursively.
-				if(remainder != null && remainder.length() > 0) {
-					patterns.addAll(checkPattern(startletter, remainder));
-				}
-			}
-		}
-
-		for(String s : patterns) {
-			System.out.println(s);
-		}
-		return patterns;
-	}
-
-	/**
-	 * Recursive method to call
-	 * @param startString
-	 * @param pattern
-	 * @return
-	 */
-	public List<String> checkPattern(String startString, String pattern) {
-		List<String> patterns = new ArrayList<>();
-
-		///If pattern is a single character, join start and pattern add to patterns.
-		if(pattern.length() == 1) {
-			patterns.add(startString + letters[Integer.parseInt(pattern) - 1]);
-		} else {
-			char [] chars = pattern.toCharArray();
-			String startletter = startString + letters[Integer.parseInt(chars[0] + "") -1];
-			String remainder = pattern.substring(1, pattern.length());
-			if(remainder != null && remainder.length() > 0) {
-				patterns.addAll(checkPattern(startletter, remainder));
-			}
-			//Check for 2 character split.
-			if(pattern.length() >= 2) {
-				startletter = pattern.substring(0, 2);
-				
-				if(Integer.parseInt(startletter) < 27) {
-					startletter = letters[Integer.parseInt(startletter) - 1];
-					remainder = pattern.substring(2);
-					if(remainder != null && remainder.length() > 0) {
-						patterns.addAll(checkPattern(startString + startletter, remainder));
-					} else {
-						patterns.add(startString + startletter);
-					}
-				}
-			}
-		}
-		return patterns;
+		return new ArrayList<>();
 	}
 }
