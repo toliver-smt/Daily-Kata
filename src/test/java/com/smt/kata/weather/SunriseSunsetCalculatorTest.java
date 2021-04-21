@@ -14,7 +14,9 @@ import com.siliconmtn.data.format.DateFormat.DatePattern;
 /****************************************************************************
  * <b>Title:</b> SunriseSunsetCalculatorTest.java
  * <b>Project:</b> SMT-Kata
- * <b>Description:</b> Unit Test for the Sunrise Sunset Kata
+ * <b>Description:</b> Unit Test for the Sunrise Sunset Kata.  Many of the unbti tests
+ * are commented out waiting for the develoepr to implement those methods in the 
+ * SunriseSunsetCalculator class.  They must be uncommented and run successfully
  * <b>Copyright:</b> Copyright (c) 2021
  * <b>Company:</b> Silicon Mountain Technologies
  * 

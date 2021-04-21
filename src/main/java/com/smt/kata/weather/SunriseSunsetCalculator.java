@@ -9,6 +9,10 @@ import java.util.Date;
  * <b>Project:</b> SMT-Kata
  * <b>Description:</b> In this Kata, you will call out to a json api and format it into 
  * a data structure and return the data structure.  You will use the Gson json classes
+ * to deserialize the response from a json object into a SunriseSunsetVO object
+ * 
+ * You may use the SMTHttpConnectionManager for the API calls
+ * 
  * <b>Copyright:</b> Copyright (c) 2021
  * <b>Company:</b> Silicon Mountain Technologies
  * 
