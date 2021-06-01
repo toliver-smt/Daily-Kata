@@ -12,7 +12,8 @@ package com.smt.kata.word;
  * 
  * If the input string is empty, return an empty string. The words in the input
  * String will only contain valid consecutive numbers.
- * If a word does not have a number, default it to 0
+ * If a word does not have a number, default it to 0.  Words with the same numbers will be 
+ * assigned the order that they appear
  * 
  * <b>Copyright:</b> Copyright (c) 2021
  * <b>Company:</b> Silicon Mountain Technologies
