@@ -98,7 +98,7 @@ class KataTreeTest {
 	void testGetInOrderList() throws Exception {
 		List<KataNode<String>> nodes = tree.getInOrderList();
 		assertEquals("111", nodes.get(0).getNodeId());
-		assertEquals("12211", nodes.get(nodes.size() - 2).getNodeId());
+		assertEquals("122", nodes.get(nodes.size() - 2).getNodeId());
 	}
 
 	/**
