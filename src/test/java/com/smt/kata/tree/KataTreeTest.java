@@ -46,6 +46,11 @@ class KataTreeTest {
 	    tree = new KataTree<String>(nodes, root);
 	}
 
+	@Test
+	void noRoot() throws Exception {
+		KataTree<String> t2 = new KataTree<String>(null, null);
+		assertNull(t2.getRootNode());
+	}
 	/**
 	 * Test method for {@link com.smt.kata.tree.KataTree#getDepth()}.
 	 */

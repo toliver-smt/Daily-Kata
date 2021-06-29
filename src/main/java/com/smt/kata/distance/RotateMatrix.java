@@ -48,7 +48,23 @@ public class RotateMatrix {
 	 * @return Rotated matrix.  Empty matrix of input is null
 	 */
 	public int[][] rotateClockwise(int[][] matrix) {
-		return new int[0][0];
+		if(matrix == null) return new int[0][0];
+		printMatrix(matrix);
+
+		int size = matrix.length;
+		for(int x = 0; x < size / 2; x++) {
+			for(int y = x; y < size - x - 1; y++) {
+				int temp = matrix[x][y];
+				
+				matrix[x][y] = matrix[size - 1 - y][x];	//0,0
+				matrix[size - 1 - y][x] = matrix[size - 1 - x][size - 1 - y]; // 0, 1;
+				matrix[size - 1 - x][size - 1 - y] = matrix[y][size - 1 - x]; //1, 1
+				matrix[y][size - 1 - x] = temp; // 1, 0
+				
+				printMatrix(matrix);
+			}
+		}
+		return matrix;
 	}
 	
 	/**
@@ -57,6 +73,32 @@ public class RotateMatrix {
 	 * @return Rotated matrix.  Empty matrix of input is null
 	 */
 	public int[][] rotateCounterClockwise(int[][] matrix) {
-		return new int[0][0];
+		if(matrix == null) return new int[0][0];
+		printMatrix(matrix);
+		int size = matrix.length;
+		for(int x = 0; x < size / 2; x++) {
+			for(int y = x; y < size - x - 1; y++) {
+				int temp = matrix[x][y];
+				matrix[x][y] = matrix[y][size - 1 - x];
+				matrix[y][size - 1 - x] = matrix[size - 1 - x][size - 1 - y];
+				matrix[size - 1 - x][size - 1 - y] = matrix[size - 1 - y][x];
+				matrix[size - 1 - y][x] = temp;
+				
+
+				printMatrix(matrix);
+			}
+		}
+		return matrix;
+	}
+
+	public void printMatrix(int[][] matrix) {
+		for(int x = 0; x < matrix.length; x++) {
+			System.out.print('[');
+			for(int y = 0; y < matrix[x].length; y++) {
+				System.out.print(matrix[x][y] + ",");
+			}
+			System.out.println(']');
+		}
+		System.out.println("");
 	}
 }

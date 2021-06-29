@@ -17,7 +17,7 @@ import java.util.List;
  * @since Jun 13, 2021
  * @updates:
  ****************************************************************************/
-public class KataNode<T> implements Serializable {
+public class KataNode<T> implements Serializable, Comparable<KataNode<T>> {
 
 	/**
 	 * 
@@ -29,6 +29,7 @@ public class KataNode<T> implements Serializable {
 	private String parentId;
 	private KataNode<T> parent;
 	private T data;
+	
 	private List<KataNode<T>> children;
 	
 	/**
@@ -62,6 +63,10 @@ public class KataNode<T> implements Serializable {
 		this.nodeId = nodeId;
 		this.setParentId(parentId);
 		this.data = data;
+	}
+
+	public KataNode<T> copy(){
+		return new KataNode<T>(this.nodeId, this.parentId, this.data);
 	}
 	
 	/**
@@ -117,7 +122,7 @@ public class KataNode<T> implements Serializable {
 	 * @return the leaf
 	 */
 	public boolean isLeaf() {
-		return false;
+		return children == null || children.size() == 0;
 	}
 
 	/**
@@ -132,5 +137,11 @@ public class KataNode<T> implements Serializable {
 	 */
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	@Override
+	public int compareTo(KataNode<T> o) {
+		// TODO Auto-generated method stub
+		return this.nodeId.compareTo(o.nodeId);
 	}
 }
