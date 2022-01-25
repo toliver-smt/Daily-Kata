@@ -82,4 +82,14 @@ public class CoordinateVO implements Serializable {
 		this.row = row;
 	}
 
+	@Override
+	public boolean equals(Object vo) {
+		return vo instanceof CoordinateVO && ((CoordinateVO)vo).getColumn() == this.getColumn() && ((CoordinateVO)vo).getRow() == this.getRow();
+	}
+	
+	@Override
+	public int hashCode() {
+		return Integer.valueOf(column).hashCode() + Integer.valueOf(row).hashCode();
+		
+	}
 }

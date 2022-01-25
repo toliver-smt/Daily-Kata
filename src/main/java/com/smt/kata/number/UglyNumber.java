@@ -38,7 +38,16 @@ public class UglyNumber {
 	 * @return nth ugly number.  Return 0 if n < 1 or greater than 1690
 	 */
 	public int find(int n) {
-		return n;
+		int ugly = 0;
+		if(n > 0 && n <= 1690) { 
+			for(int i = 0; i < n;) {
+				ugly++;
+				if(ugly == 1 || ugly % 2 == 0 || ugly % 3 == 0 || ugly % 5 == 0) {
+					i++;
+				}
+			}
+		}
+		return ugly;
 	}
 
 }

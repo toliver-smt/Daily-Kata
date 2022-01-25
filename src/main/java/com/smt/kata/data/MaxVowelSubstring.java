@@ -1,5 +1,9 @@
 package com.smt.kata.data;
 
+import java.util.stream.IntStream;
+
+import org.apache.commons.lang3.StringUtils;
+
 /****************************************************************************
  * <b>Title</b>: MaxVowelSubstring.java
  * <b>Project</b>: Daily-Kata
@@ -63,7 +67,6 @@ public class MaxVowelSubstring {
 	 * @return max number of vowels found.  0 otherwise
 	 */
 	public int find(String word, int k) {
-		return k;
+		return (StringUtils.isEmpty(word) || k <= 0 || k > word.length()) ? 0 : IntStream.range(0, word.length() - k).map(i -> (int)word.substring(i, i + k).chars().filter(c -> vowels.indexOf(c) > -1).count()).max().orElse(0);
 	}
-
 }

@@ -1,5 +1,7 @@
 package com.smt.kata.game;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 /****************************************************************************
  * <b>Title</b>: HouseRobber.java
  * <b>Project</b>: SMT-Kata
@@ -46,6 +48,10 @@ public class HouseRobber {
 	 * @return
 	 */
 	public int calculate(int[] values) {
-		return values.length;
+		return ArrayUtils.isNotEmpty(values) ? Math.max(calcMax(values, 0, 0), calcMax(values, 1, 0)) : 0;
+	}
+
+	private int calcMax(int[] values, int pos, int max) {
+		return pos >= values.length ? max : Math.max(calcMax(values, pos+2, max + values[pos]), calcMax(values, pos+3, max + values[pos]));
 	}
 }

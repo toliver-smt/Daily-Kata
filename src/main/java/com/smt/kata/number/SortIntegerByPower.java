@@ -1,5 +1,10 @@
 package com.smt.kata.number;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 // JDK 11.x
 
 /****************************************************************************
@@ -77,6 +82,33 @@ public class SortIntegerByPower {
 	 * @return value in the high/low range, sorted that matches the kth element
 	 */
 	public int find(int low, int high, int k) {
-		return k;
+		if(low == high) {
+			return low;
+		} else if(low < 1 || high < 1 || low > high || high < low || k > (high -low)) {
+			return 0;
+		}
+
+		List<int[]> pows = new ArrayList<>();
+		for(int i = low; i <= high; i++) {
+			pows.add(new int[] {getPow(i), i});
+		}
+
+		Collections.sort(pows, new Comparator<int[]>() {
+			@Override
+			public int compare(int [] n1, int[] n2) {
+				return n1[0] - n2[0] != 0 ? n1[0] - n2[0] : n1[1] - n2[1];
+			}
+		});
+		
+		return pows.get(k-1)[1];
+	}
+
+	public int getPow(int i) {
+		int step = 0;
+		while(i != 1) {
+			i = (i % 2 == 0) ? i/2 : i * 3 + 1;
+			step++;
+		}
+		return step;
 	}
 }

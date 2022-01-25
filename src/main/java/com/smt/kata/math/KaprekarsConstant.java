@@ -1,5 +1,7 @@
 package com.smt.kata.math;
 
+import java.util.Comparator;
+
 /****************************************************************************
  * <b>Title</b>: KaprekarsConstant.java
  * <b>Project</b>: SMT-Kata
@@ -38,6 +40,16 @@ public class KaprekarsConstant {
 	 * @return the number of steps to acheive the number
 	 */
 	public int calculateSteps(int num) {
-		return num;
+		if(num < 999 || num > 9999 || Integer.toString(num).chars().distinct().toArray().length < 2) {
+			return 0;
+		}
+
+		int steps = 0;
+		while(num!= 6174) {
+			int high = Integer.valueOf(Integer.toString(num).chars().boxed().sorted(Comparator.reverseOrder()).map(ele -> Integer.toString(Character.getNumericValue(ele))).reduce("", String::concat));
+			num = high - Integer.valueOf(new StringBuilder(Integer.toString(high)).reverse().toString());
+			steps++;
+		}
+		return steps;
 	}
 }

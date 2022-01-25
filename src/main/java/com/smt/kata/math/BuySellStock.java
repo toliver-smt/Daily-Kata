@@ -1,5 +1,7 @@
 package com.smt.kata.math;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 /****************************************************************************
  * <b>Title</b>: BuySellStock.java
  * <b>Project</b>: SMT-Kata
@@ -42,7 +44,15 @@ public class BuySellStock {
 	 * @return Max profit amount.  ) if no profit (or loss)
 	 */ 
 	public int calculateMaxProfit(int[] trades) {
-		return trades.length;
+		int maxVal = 0;
+		if(ArrayUtils.isNotEmpty(trades)) {
+			for(int i = 0; i < trades.length; i++) {
+				for(int j = i+1; j < trades.length; j++) {
+					maxVal = trades[j] - trades[i] > maxVal ? trades[j] - trades[i] : maxVal;
+				}
+			}
+		}
+		return maxVal;
 	}
 
 }

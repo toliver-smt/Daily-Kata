@@ -27,8 +27,10 @@ public class CommonOneBits {
 	 * @return Next number to match
 	 */
 	public int find(int start) {
-		
-		// Return the value
-		return start;
+		if(start >= 0 && start <= 1024) {
+			long ones = Integer.toBinaryString(start).chars().filter(c -> c == '1').count();
+			while(ones != Integer.toBinaryString(++start).chars().filter(c -> c == '1').count());
+			return start;
+		} return 0;
 	}
 }

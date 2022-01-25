@@ -1,5 +1,7 @@
 package com.smt.kata.data;
 
+import com.siliconmtn.data.text.StringUtil;
+
 /****************************************************************************
  * <b>Title</b>: PIIMask.java
  * <b>Project</b>: SMT-Kata
@@ -98,6 +100,32 @@ public class PIIMask {
 	 * @return Masked data.  Empty if data is invalid
 	 */
 	public String mask(String source) {
-		return source;
+		if(!StringUtil.isEmpty(source)) {
+			if (source.matches(EMAIL_REGEX)) {
+				return (source.charAt(0) + "*****" + source.substring(source.indexOf('@') - 1)).toLowerCase();
+			} else {
+				String s2 = "";
+				for(char c : source.toCharArray()) {
+					if(Character.isDigit(c)) {
+						s2 += "" + c;
+					}
+				}
+				if(!StringUtil.isEmpty(s2) && s2.length() >= 10) {
+					String mask = "***-***-" + s2.substring(s2.length() - 4);
+					if(s2.length() > 10){
+						mask = "-" + mask;
+						for(int i = 0; i < s2.length() - 10; i++) {
+							mask = "*" + mask;
+						}
+						mask = "+" + mask;
+					}
+					s2 = mask;
+				} else {
+					s2 = "";
+				}
+				return s2;
+			}
+		}
+		return "";
 	}
 }

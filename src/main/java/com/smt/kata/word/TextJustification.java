@@ -1,5 +1,12 @@
 package com.smt.kata.word;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.siliconmtn.data.text.StringUtil;
+
 /****************************************************************************
  * <b>Title</b>: TextJustification.java
  * <b>Project</b>: Daily-Kata
@@ -76,6 +83,58 @@ public class TextJustification {
 	 * @return Formatted phrase
 	 */
 	public String formatPhrase(String phrase, int maxWidth) {
-		return phrase;
+		if(StringUtils.isEmpty(phrase) || maxWidth == 0) {
+			return "";
+		}
+
+		String [] words = phrase.split(" ");
+		List<List<String>> lines = new ArrayList<>();
+		List<String> line = new ArrayList<>();
+		int len = 0;
+		for(String s : words) {
+			if(s.length() > maxWidth) {
+				return "";
+			}
+			if(len == 0) {
+				len += s.length();
+				line.add(s);
+			} else if(len + 1 + s.length() > maxWidth) {
+				lines.add(line);
+				line = new ArrayList<>();
+				line.add(s);
+				len = s.length();
+			} else {
+				line.add(s);
+				len += s.length() + 1;
+			}
+		}
+		lines.add(line);
+		System.out.println(lines.size());
+		StringBuilder s = new StringBuilder();
+		for(int i = 0; i < lines.size(); i++) {
+			if(i == lines.size() - 1) {
+				s.append(StringUtil.padRight(StringUtils.join(lines.get(i), " "), ' ', maxWidth));
+			} else {
+				List<String> l = lines.get(i);
+				String nonSpace = StringUtils.join(l, "");
+				int spaces = maxWidth - nonSpace.length();
+				int spaceSize = spaces / l.size() != 0 ? spaces / l.size() + 1 : spaces / l.size();
+				for(int j = 0; j < l.size(); j++) {
+					if(l.size() > 1) {
+						if(j != l.size() - 1) {
+							s.append(l.get(j)).append(StringUtil.padRight("", ' ', (spaces - spaceSize) > spaceSize ? spaceSize : spaceSize - 1));
+							spaces -= spaceSize;
+							System.out.println("Spaces : " + spaces);
+						} else {
+							s.append(l.get(j));
+						}
+					} else {
+						s.append(StringUtil.padRight(l.get(0), ' ', maxWidth));	
+					}
+				}
+				s.append("\n");
+			}
+		}
+		return s.toString();
 	}
 }

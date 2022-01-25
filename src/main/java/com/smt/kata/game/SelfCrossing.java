@@ -1,5 +1,12 @@
 package com.smt.kata.game;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.smt.kata.distance.bean.CoordinateVO;
+
 /****************************************************************************
  * <b>Title</b>: SelfCrossing.java
  * <b>Project</b>: Daily-Kata
@@ -45,7 +52,36 @@ public class SelfCrossing {
 	 * @return True if lines overlap.  False otherwise
 	 */
 	public boolean overlaps(int[] steps) {
-		return steps == null;
+		boolean cross = false;
+		if(ArrayUtils.isNotEmpty(steps)) {
+			Set<CoordinateVO> track = new HashSet<>();
+			CoordinateVO c = new CoordinateVO(0,0);
+			track.add(c);
+			for(int i = 0; i < steps.length; i++) {
+				for(int j = 1; j <= steps[i]; j++) {
+					c = getCoordinate(c, i);
+					if(c != null && track.contains(c)) {
+						return true;
+					}
+					track.add(c);
+				}
+			}
+		}
+		return cross;
+	}
+
+	private CoordinateVO getCoordinate(CoordinateVO c, int i) {
+		switch(i % 4) {
+		case 0: 
+			return new CoordinateVO(c.getRow(), c.getColumn() + 1);
+		case 1: 
+			return new CoordinateVO(c.getRow() - 1, c.getColumn());
+		case 2: 
+			return new CoordinateVO(c.getRow(), c.getColumn() - 1);
+		case 3: 
+			return new CoordinateVO(c.getRow() + 1, c.getColumn());
+		}
+		return null;
 	}
 
 }

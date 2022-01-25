@@ -1,5 +1,12 @@
 package com.smt.kata.word;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+
 /****************************************************************************
  * <b>Title</b>: ReplaceWords.java
  * <b>Project</b>: SMT-Kata
@@ -26,7 +33,7 @@ package com.smt.kata.word;
  * Output: "a a b c"
  * 
  * Example 3:
- * Input: dictionary = ["a", "aa", "aaa", "aaaa"], sentence = "a aa a aaaa aaa aaa aaa aaaaaa bbb baba ababa"
+ * Input: dictionary = ["a", "ab", "b", "aaaa", "dd"], sentence = "a aa a aaaa aaa aaa aaa aaaaaa bbb baba ababa"
  * Output: "a a a a a a a a bbb baba a"
  * 
  * Example 4:
@@ -59,7 +66,20 @@ package com.smt.kata.word;
 public class ReplaceWords {
 
 	public String update(String phrase, String[] roots) {
-		return phrase;
+		String result = "";
+		if(!StringUtils.isEmpty(phrase) && ArrayUtils.isNotEmpty(roots)) {
+			
+			final List<String> rootList = Arrays.asList(roots).stream().filter(s -> StringUtils.isNotEmpty(s)).collect(Collectors.toList());
+			
+			for(String prefix : rootList) {
+				for(String word : phrase.split(" ")) {
+					if(word.startsWith(prefix)) {
+						phrase = phrase.replaceFirst(word, prefix);
+					}
+				}
+			}
+			result = phrase.trim();
+		}
+		return result;
 	}
-
 }

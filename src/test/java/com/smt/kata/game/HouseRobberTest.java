@@ -84,5 +84,4 @@ class HouseRobberTest {
 	void testCalculateExampleStarttwo() throws Exception {
 		assertEquals(16, hr.calculate(new int[] {2, 7, 3, 9, 1} ));
 	}
-
 }

@@ -1,4 +1,6 @@
 package com.smt.kata.data;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /****************************************************************************
  * <b>Title</b>: MinimumAsciiDelete.java
@@ -53,6 +55,6 @@ public class MinimumAsciiDelete {
 	 * @return Total of the removed ascii values
 	 */
 	public int getMinumumValue(String s1, String s2) {
-		return s1.length() + s2.length();
+		return Stream.concat(Optional.ofNullable(s1).orElse("").chars().boxed().map((i) -> Optional.ofNullable(s2).orElse("").indexOf(i) > -1 ? 0 : i), Optional.ofNullable(s2).orElse("").chars().boxed().map((i) -> Optional.ofNullable(s1).orElse("").indexOf(i) > -1 ? 0 : i)).reduce(0, Integer::sum);
 	}
 }

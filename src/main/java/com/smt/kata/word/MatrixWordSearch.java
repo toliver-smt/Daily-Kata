@@ -1,5 +1,15 @@
 package com.smt.kata.word;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import com.siliconmtn.data.text.StringUtil;
+import com.smt.kata.distance.bean.CoordinateVO;
+
 /****************************************************************************
  * <b>Title</b>: MatrixWordSearch.java
  * <b>Project</b>: SMT-Kata
@@ -51,6 +61,49 @@ public class MatrixWordSearch {
 	 * @return True if found.  False otherwise
 	 */
 	public boolean find(String[][] board, String word) {
-		return board.length == 0;
+		if(!ArrayUtils.isEmpty(board) && !StringUtil.isEmpty(word) && !ArrayUtils.isEmpty(board[0])) {
+			for(int i = 0; i < board.length; i++) {
+				for(int j = 0; j < board[i].length; j++) {
+					if(board[i][j].charAt(0) == word.charAt(0)) {
+						List<String> coords = new ArrayList<>();
+						coords.add(String.format("%d,%d", i, j));
+						if(recurse(i, j, board, word.substring(1), coords)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean recurse(int row, int col, String[][] board, String word, List<String> coords) {
+		if(StringUtils.isEmpty(word)) {
+			return true;
+		}
+		List<CoordinateVO> candidates = new ArrayList<>();
+		candidates.add(new CoordinateVO(row + 1, col));
+		candidates.add(new CoordinateVO(row - 1, col));
+		candidates.add(new CoordinateVO(row, col + 1));
+		candidates.add(new CoordinateVO(row, col - 1));
+		char c = word.charAt(0);
+
+		for(CoordinateVO cvo : candidates) {
+			int x = cvo.getRow();
+			int y = cvo.getColumn();
+			if(isValid(x, y, board) && board[x][y].charAt(0) == c && !coords.contains(String.format("%d,%d", x, y))) {
+				List<String> cCopy = new ArrayList<>();
+				Collections.copy(coords, cCopy);
+				coords.add(String.format("%d,%d", x, y));
+				if(recurse(x, y, board, word.substring(1), coords)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isValid(int i, int col, String[][] board) {
+		return i >= 0 && i < board.length && col >= 0 && col < board[i].length;
 	}
 }

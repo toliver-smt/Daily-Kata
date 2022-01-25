@@ -1,8 +1,12 @@
 package com.smt.kata.distance;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 // JDK 11.x
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /****************************************************************************
  * <b>Title</b>: ClassroomFriendship.java
@@ -46,6 +50,43 @@ public class ClassroomFriendship {
 	 * @return count of the number of friend groups
 	 */
 	public int countGroups(Map<Integer, List<Integer>> friends) {
-		return friends.size();
+		if(friends == null || friends.isEmpty()) {
+			return 0;
+		}
+		List<Set<Integer>> relationships = new ArrayList<>();
+		for(Entry<Integer, List<Integer>> rels : friends.entrySet()) {
+			if(rels.getKey() != null) {
+				Set<Integer> rel = findRelationship(relationships, rels.getKey(), rels.getValue());
+				if(rel == null) {
+					rel = new HashSet<>();
+					rel.add(rels.getKey());
+					
+					relationships.add(rel);
+				}
+				if(rels.getValue() != null) {
+					rel.addAll(rels.getValue());
+				}
+			}
+		}
+		
+		return relationships.size();
+	}
+
+	private Set<Integer> findRelationship(List<Set<Integer>> rels, int personID, List<Integer> list) {
+		for(Set<Integer> r : rels) {
+			if (r.contains(personID)) {
+				return r;
+			}
+		}
+		if(list != null) {
+			for(Integer i : list) {
+				for(Set<Integer> r : rels) {
+					if (r.contains(i)) {
+						return r;
+					}
+				}
+			}
+		}
+		return null;
 	}
 }

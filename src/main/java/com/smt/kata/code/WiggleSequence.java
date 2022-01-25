@@ -54,6 +54,25 @@ public class WiggleSequence {
 	 * @return Number of wiggles in the sequence
 	 */
 	public int count(int[] sequence) {
-		return sequence.length;
+		int wiggles = 0;
+		if(sequence != null && sequence.length > 3) {
+			wiggles = 2;
+			int start = -1;
+			for(int i = 2; i < sequence.length; i++) {
+				int diff1 = sequence[i] - sequence[i-1];
+				int diff2 = sequence[i-1] - sequence[i-2];
+				if (diff1 > 0 && diff2 < 0) {
+					start = start == -1 ? i-2 : start; 
+				} else if (diff1 < 0 && diff2 > 0) {
+					start = start == -1 ? i-2 : start;
+				} else if(start != -1) {
+					start++;
+				}
+			}
+			if(start != -1) {
+				wiggles = Math.max(wiggles, sequence.length - start);
+			}
+		}
+		return wiggles;
 	}
 }

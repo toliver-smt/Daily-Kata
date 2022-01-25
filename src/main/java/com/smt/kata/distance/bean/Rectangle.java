@@ -23,8 +23,8 @@ public class Rectangle implements Serializable {
 	private static final long serialVersionUID = -3615572197475045115L;
 	
 	// Members
-	CoordinateVO topLeft;
-	CoordinateVO bottomRight;
+	private CoordinateVO topLeft;
+	private CoordinateVO bottomRight;
 	
 	/**
 	 * 
@@ -34,4 +34,21 @@ public class Rectangle implements Serializable {
 		this.topLeft = topLeft;
 		this.bottomRight = bottomRight;
 	}
+
+	public CoordinateVO getTopLeft() {
+		return topLeft;
+	}
+
+	public void setTopLeft(CoordinateVO topLeft) {
+		this.topLeft = topLeft;
+	}
+
+	public CoordinateVO getBottomRight() {
+		return bottomRight;
+	}
+
+	public void setBottomRight(CoordinateVO bottomRight) {
+		this.bottomRight = bottomRight;
+	}
+	
 }

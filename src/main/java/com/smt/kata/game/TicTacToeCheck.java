@@ -1,5 +1,12 @@
 package com.smt.kata.game;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 /****************************************************************************
  * <b>Title</b>: TicTacToeCheck.java
  * <b>Project</b>: SMT-Kata
@@ -80,6 +87,82 @@ public class TicTacToeCheck {
 	 * @return Player A or B if a player won.  Player N if no winner
 	 */
 	public Player evaluate(int[][] moves) {
+		int[][] board = new int[3][3];
+		Player winner = Player.N;
+		//validate moves
+		if(validateMoves(moves)) {
+			//playMoves
+			board = playMoves(board, moves);
+
+			//evaluateBoard
+			winner = checkWinner(board);
+		}
+		return winner;
+
+	}
+
+	private int[][] playMoves(int[][] board, int[][] moves) {
+		boolean isPlayerOne = true;
+		for(int[] move : moves) {
+			board[move[0]][move[1]] = isPlayerOne ? 'X' : 'O';
+			isPlayerOne = !isPlayerOne;
+		}
+		return board;
+	}
+
+	private Player checkWinner(int[][] board) {
+		Player p = Player.N;
+		// Check Rows
+		for(int i = 0; i < board.length; i++) {
+			if(isWinner(board[i])) {
+				return getPlayer(board[i][0]);
+			}
+		}
+
+		//Check Columns
+		for(int i = 0; i < board.length; i++) {
+			int [] col = new int[board.length];
+			for(int j = 0; j < board[i].length; j++) {
+				col[j] = board[i][j];
+			}
+			if(isWinner(col)) {
+				return getPlayer(col[0]);
+			}
+		}
+		
+		//Check Diagonals
+		int [] lDiag = new int[3];
+		int [] rDiag = new int[3];
+		for(int i = 0; i < board.length; i++) {
+			lDiag[i] = board[i][i];
+			rDiag[i] = board[i][board.length - 1 - i];
+		}
+		if(isWinner(lDiag)) {
+			return getPlayer(lDiag[0]);
+		}
+		
+		if(isWinner(rDiag)) {
+			return getPlayer(rDiag[0]);
+		}
+		return p;
+	}
+
+	private Player getPlayer(int i) {
+		if(i == 'X') return Player.A;
+		else if(i == 'O') return Player.B;
 		return Player.N;
 	}
+
+	private boolean isWinner(int[] row) {
+		Map<Integer, Long> moves = Arrays.stream(row).boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		return moves.keySet().size() == 1 && row[0] != 0;
+	}
+
+	private boolean validateMoves(int[][] moves) {
+		return ArrayUtils.isNotEmpty(moves) && ArrayUtils.isNotEmpty(moves[0]);
+	}
 }
+
+
+
+

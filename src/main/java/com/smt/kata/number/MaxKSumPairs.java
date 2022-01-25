@@ -1,5 +1,11 @@
 package com.smt.kata.number;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /****************************************************************************
  * <b>Title</b>: MaxKSumPairs.java
  * <b>Project</b>: SMT-Kata
@@ -45,7 +51,38 @@ public class MaxKSumPairs {
 	 * @return Number of operations
 	 */
 	public int calculate(int[] source, int target) {
-		// Validate the data
-		return source.length + target;
+		int pairs = 0;
+		// Validate the data\
+		if(source != null  && target > 0) {
+			List<Integer> nums = Arrays.stream(source).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+			List<Integer> matches = new ArrayList<>();
+			while(!nums.isEmpty()) {
+				int match = -1;
+				for(int i = 0; i < nums.size(); i++) {
+					int ele = nums.get(i);
+					int sum = sum(ele, matches);
+					if(ele < target && sum < target) {
+						matches.add(ele);
+						match = i;
+						break;
+					} else if (ele == target || sum == target) {
+						pairs++;
+						matches.clear();
+						match = i;
+						break;
+					}
+				}
+				if(match > -1) {
+					nums.remove(match);
+				} else {
+					matches.clear();
+				}
+			}
+		}
+		return pairs;
+	}
+
+	private int sum(int ele, List<Integer> matches) {
+		return matches.stream().collect(Collectors.summingInt(Integer::intValue)) + ele;
 	}
 }

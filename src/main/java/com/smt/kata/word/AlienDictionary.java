@@ -1,6 +1,13 @@
 package com.smt.kata.word;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import javax.xml.datatype.DatatypeConfigurationException;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 /****************************************************************************
  * <b>Title</b>: AlienDictionary.java
@@ -50,6 +57,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
  ****************************************************************************/
 public class AlienDictionary {
 
+	Map<Character, Integer> letterVals = new HashMap<>();
+	String order;
 	/**
 	 * Initializes the class with the new alphabet order
 	 * @param order Order of the letters in the new alphabet
@@ -57,8 +66,15 @@ public class AlienDictionary {
 	 */
 	public AlienDictionary(String order) throws DatatypeConfigurationException {
 		super();
-		
-		throw new DatatypeConfigurationException("Don't do this");
+		this.order = order;
+		if(order != null && order.length() == 26) {
+			letterVals.put(' ', 0);
+			for(int i = 0; i < order.length(); i++) {
+				letterVals.put(order.charAt(i), i+1);
+			}
+		} else {
+			throw new DatatypeConfigurationException("Don't do this");
+		}
 	}
 
 	/**
@@ -67,6 +83,44 @@ public class AlienDictionary {
 	 * @return True if the words are in order and false otherwise
 	 */
 	public boolean isSorted(String[] words) {
-		return words.length == 0;
+		boolean sorted = true;
+		if(words == null || words.length < 2) return false;
+		words = sanitizeWords(words);
+		Set<Character> checkedChars;
+		for(int i = 1; i < 100; i++) {
+			checkedChars = new HashSet<>();
+			boolean done = true;
+			for(int j = 1; j < words.length; j++) {
+				String curr = words[j];
+				String prev = words[j-1];
+				if(curr.length() > i && prev.length() > i) {
+					if(letterVals.get(curr.charAt(i)) < letterVals.get(prev.charAt(i-1))) {
+						return false;
+					} else if (prev.length() > curr.length() && prev.startsWith(curr)) {
+						return false;
+					}
+					if(checkedChars.contains(curr.charAt(i))) {
+						done = false;
+					} else {
+						checkedChars.add(curr.charAt(i));
+					}
+				}
+			}
+			if(done) {
+				return true;
+			}
+		}
+		return sorted;
+	}
+	public String [] sanitizeWords(String [] words) {
+		for(int i = 0; i < words.length; i++) {
+			if(words[i] == null) {
+				words = ArrayUtils.remove(words, i--);
+			} else {
+				words[i] = words[i].toLowerCase();
+			}
+		}
+
+		return words;
 	}
 }

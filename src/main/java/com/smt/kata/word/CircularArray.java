@@ -2,7 +2,10 @@ package com.smt.kata.word;
 
 // JDK 11.x
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 /****************************************************************************
  * <b>Title</b>: CircularArray.java
@@ -32,6 +35,44 @@ public class CircularArray {
 	 * @return Collection of words reordered.  Empty list if not possible
 	 */
 	public List<String> create(String[] words) {
+		List<String> res = new ArrayList<>();
+		if(words != null && words.length > 1) {
+			for(int i = 0; i < words.length; i++) {
+				String s = words[i];
+				List<String >w = new ArrayList<>();
+				w.add(s);
+				List<String> r = chainWords(cpArray(words, i), w);
+				if(r.size() > res.size()) {
+					res = r;
+				}
+			}
+			
+		}
+		return res;
+	}
+
+	private String[] cpArray(String[] words, int i) {
+		String [] clone = Arrays.copyOf(words, words.length);
+		clone[i] = "";
+		return clone;
+		
+	}
+
+	private List<String> chainWords(String[] words, List<String> w) {
+		if(w.size() == words.length) {
+			w.add(w.get(0));
+			return w;
+		}
+		String lastWord = w.get(w.size() - 1);
+		for(int i = 0; i < words.length; i++) {
+			String s = words[i];
+			if(StringUtils.isNotEmpty(s) && s.charAt(0) == lastWord.charAt(lastWord.length() - 1)) {
+				List<String> wNew = new ArrayList<>();
+				wNew.addAll(w);
+				wNew.add(s);
+				return chainWords(cpArray(words, i), wNew);
+			}
+		}
 		return new ArrayList<>();
 	}
 }

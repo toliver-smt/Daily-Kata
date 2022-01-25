@@ -1,5 +1,7 @@
 package com.smt.kata.number;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 /****************************************************************************
  * <b>Title</b>: MaxConsecutiveOnes.java
  * <b>Project</b>: SMT-Kata
@@ -36,7 +38,20 @@ public class MaxConsecutiveOnes {
 	 * @return Count of the largest sequence of ones
 	 */
 	public int count(int[] values) {
-		return values.length;
+		int len = 0;
+		int maxLen = 0;
+		if(ArrayUtils.isNotEmpty(values)) {
+			for(int i : values) {
+				if(i == 0) {
+					maxLen = Math.max(len, maxLen);
+					len = 0;
+				} else {
+					len++;
+				}
+			}
+			maxLen = Math.max(len, maxLen);
+		}
+		return maxLen;
 	}
 
 }

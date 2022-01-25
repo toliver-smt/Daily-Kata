@@ -53,7 +53,23 @@ public class ConsecutiveDifferences {
 	 * data or none found
 	 */
 	public List<Integer> find(int n, int k) {
-		return new ArrayList<>();
+		List<Integer> diffs = new ArrayList<>();
+		if(n >= 2 && n < 10 && k >= 0 && k < 10) {
+			for(int i = (int) Math.pow(10, n-1); i < (int)Math.pow(10, n); i++) {
+				char [] s = Integer.toString(i).toCharArray();
+				boolean valid = true;
+				for(int j = 1; j < s.length; j++) {
+					if(Math.abs(s[j] - s[j-1]) != k) {
+						valid = false;
+						break;
+					}
+				}
+				if(valid) {
+					diffs.add(i);
+				}
+			}
+		}
+		return diffs;
 	}
 
 }

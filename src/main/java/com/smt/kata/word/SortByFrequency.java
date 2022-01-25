@@ -1,5 +1,11 @@
 package com.smt.kata.word;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import com.siliconmtn.data.text.StringUtil;
+
 /****************************************************************************
  * <b>Title</b>: SortByFrequency.java
  * <b>Project</b>: SMT-Kata
@@ -42,7 +48,18 @@ public class SortByFrequency {
 	 * @return characters sorted by the number of times they appear in the word
 	 */
 	public String sort(String word) {
-		return word;
+		
+		return StringUtil.defaultString(word, "").toLowerCase() //Perform Validation
+			.chars()	//Convert to character stream
+			.boxed()	//Promote Primitive values to Boxed Object Values
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))	//Group in a map of <Char, Char Count>
+			.entrySet()	//Get the Entry Set of Character Counts
+			.stream()	//Make a stream we can work with.
+			.sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
+			.map(entry -> Character.toString(entry.getKey())) //Map to just the Character we want now that it's sorted
+			.reduce("", String::concat);	//Reduce all letters to a String.
 	}
+	
+	
 
 }

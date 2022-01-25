@@ -2,7 +2,12 @@ package com.smt.kata.word;
 
 // JDK 11.x
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /****************************************************************************
  * <b>Title</b>: WordSubsets.java
@@ -63,6 +68,50 @@ public class WordSubsets {
 	 * @return Collection of words that match the patterns
 	 */
 	public List<String> find(String[] words, String[] searchVal) {
-		return new ArrayList<>();
+		List<String> subsets = new ArrayList<>();
+		if(words == null || words.length == 0 || searchVal == null || searchVal.length == 0) {
+			return subsets;
+		} else {
+			words = sanitize(words);
+			searchVal = sanitize(searchVal);
+			for(String w : words) {
+				boolean matches = true;
+				for(String s : searchVal) {
+					Map<Character, Integer> chars = new HashMap<>();
+					for(char c : s.toLowerCase().toCharArray()) {
+						int pos = -1;
+						if(chars.containsKey(c)) {
+							pos = w.toLowerCase().indexOf(c, chars.get(c) + 1);
+						} else {
+							pos = w.toLowerCase().indexOf(c);
+						}
+						
+						if(pos == -1) {
+							matches= false;
+							break;
+						} else {
+							chars.put(c, pos);
+						}
+					}
+					if(!matches) {
+						break;
+					}
+				}
+				if(matches) {
+					subsets.add(w.toLowerCase());
+				}
+			}
+		}
+		return subsets;
+	}
+
+	private String[] sanitize(String[] words) {
+		List<String> clean = new ArrayList<>();
+		for(String s : words) {
+			if(StringUtils.isNotEmpty(s)) {
+				clean.add(s.toLowerCase());
+			}
+		}
+		return ArrayUtils.toStringArray(clean.toArray());
 	}
 }

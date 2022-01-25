@@ -1,5 +1,10 @@
 package com.smt.kata.code;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
+
 /****************************************************************************
  * <b>Title</b>: StringWindow.java
  * <b>Project</b>: SMT-Kata
@@ -27,7 +32,24 @@ public class StringWindow {
 	 * @return Smallest Window.  0 is returned if invalid data.
 	 */
 	public int find(String word) {
-		return word.length();
+		int count = 0;
+		if(StringUtils.isNotEmpty(word)) {
+			count = word.length();
+			Set<Integer> wordSet = getSet(word);
+			for(int i = 0, j = i+1; i < (word.length() - wordSet.size()) && j < word.length(); j++) {
+				if(getSet(word.substring(i, j)).containsAll(wordSet)) {
+					count = Math.min(count, j - i);
+				}
+				if (j == word.length() - 1) {
+					i++;
+					j = i;
+				}
+			}
+		}
+		return count;
 	}
 
+	private Set<Integer> getSet(String chars) {
+		return chars.toLowerCase().chars().boxed().collect(Collectors.toSet());
+	}
 }

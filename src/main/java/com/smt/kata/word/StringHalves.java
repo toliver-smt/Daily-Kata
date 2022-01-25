@@ -1,5 +1,10 @@
 package com.smt.kata.word;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
 /****************************************************************************
  * <b>Title</b>: StringHalves.java
  * <b>Project</b>: SMT-Kata
@@ -51,6 +56,7 @@ package com.smt.kata.word;
  ****************************************************************************/
 public class StringHalves {
 
+	Pattern p = Pattern.compile("[AEIOU]");
 	/**
 	 * Calculates whether the number of vowels and consonants are the same after
 	 * splitting the source string in half
@@ -58,6 +64,15 @@ public class StringHalves {
 	 * @return True if the numbers match.  False otherwise;
 	 */
 	public boolean calculate(String s) {
-		return s.length() == 0;
+		if(StringUtils.isEmpty(s) || s.length() % 2 != 0) {
+			return false;
+		}
+		s = s.toUpperCase();
+		Matcher am = p.matcher(s.substring(0, s.length() / 2));
+		Matcher bm = p.matcher(s.substring(s.length() / 2));
+		int ca = 0, cb = 0;
+		while(am.find()) ca++;
+		while(bm.find()) cb++;
+		return ca == cb;
 	}
 }

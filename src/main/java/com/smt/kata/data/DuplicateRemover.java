@@ -1,5 +1,7 @@
 package com.smt.kata.data;
 
+import com.siliconmtn.data.text.StringUtil;
+
 /****************************************************************************
  * <b>Title</b>: DuplicateRemover.java
  * <b>Project</b>: SMT-Kata
@@ -57,6 +59,22 @@ public class DuplicateRemover {
 	 * @return Processed String.
 	 */
 	public String process(String source, int numDups) {
+		if(numDups < 2 || source == null) {
+			return source;
+		} else {
+			boolean hasDupes = false;
+			do {
+				hasDupes = false;
+				for(char c = 'a'; c <= 'z'; c++) {
+					String s = StringUtil.padRight("" + c, c, numDups);
+					if(source.contains(s)) {
+						
+						source = source.replace(s, "");
+						hasDupes = true;
+					}
+				}
+			} while(hasDupes);
+		}
 		return source;
 	}
 }

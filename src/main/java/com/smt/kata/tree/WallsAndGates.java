@@ -1,5 +1,8 @@
 package com.smt.kata.tree;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /****************************************************************************
  * <b>Title</b>: WallsAndGates.java
  * <b>Project</b>: SMT-Kata
@@ -42,12 +45,46 @@ package com.smt.kata.tree;
  * @updates:
  ****************************************************************************/
 public class WallsAndGates {
-	
+	Set<String> visited;
 	/**
 	 * Assigns the distance from each room to a gate
 	 * @param rooms Matrix of rooms, gates and walls
 	 */
 	public int[][] assign(int[][] rooms) {
-		return new int[0][];
+		
+		if(rooms == null || rooms.length == 0 || rooms[0] == null || rooms[0].length == 0) {
+			return new int[0][];
+		}
+		int[][] res = new int[rooms.length][rooms[0].length];
+		for(int i = 0; i < rooms.length; i++) {
+			for(int j = 0; j < rooms[i].length; j++) {
+				if(rooms[i][j] == -1 || rooms[i][j] == 0) {
+					res[i][j] = rooms[i][j];
+				}
+				else {
+					visited = new HashSet<>();
+					res[i][j] = calcDistance(i, j, rooms, 0);
+				}
+			}
+		}
+		return res;
+	}
+
+	private int calcDistance(int x, int y, int[][] rooms, int distance) {
+		String key = x + "," + y;
+		if(x < 0 || x > rooms.length-1 || y < 0 || y > rooms[x].length -1 || visited.contains(key) || rooms[x][y] == -1) {
+			return 99999999;
+		}
+		if(rooms[x][y] == 0) {
+			return distance;
+		} else {
+			visited.add(key);
+		}
+		int left = calcDistance(x - 1, y, rooms, distance + 1);
+		int right = calcDistance(x + 1, y, rooms, distance + 1);
+		int up = calcDistance(x, y + 1, rooms, distance + 1);
+		int down = calcDistance(x, y - 1, rooms, distance + 1);
+		
+		return Math.min(Math.min(Math.min(left, right), up), down);
 	}
 }

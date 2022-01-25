@@ -1,5 +1,7 @@
 package com.smt.kata.number;
 
+import java.util.stream.IntStream;
+
 /****************************************************************************
  * <b>Title</b>: XORMania.java
  * <b>Project</b>: SMT-Kata
@@ -48,7 +50,7 @@ public class XORMania {
 	 * @return Number of matching positive integers.  ) if invalid data
 	 */
 	public int findMatches(int m, int n) {
-		return m + n;
+		return (int) (IntStream.range(0, m/2).filter(i -> ((i^(m-i)) == n)).count() * 2);
 	}
 
 }
