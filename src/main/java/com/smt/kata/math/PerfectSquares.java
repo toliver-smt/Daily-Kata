@@ -25,7 +25,7 @@ public class PerfectSquares {
 	/**
 	 * Finds the smallest number of squares that add to the total "n"
 	 * @param n Number to match the squares
-	 * @return Number of squares to colve the matches
+	 * @return Number of squares to solve the matches
 	 */
 	public int findSmallestNumber(int n) {
 		return n;
