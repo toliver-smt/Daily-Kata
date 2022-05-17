@@ -111,11 +111,6 @@ class RotateMatrixTest {
 	void testRotateCounterClockwiseLarge() throws Exception {
 		int[][] rotated = rm.rotateCounterClockwise(largeMatrix);
 		
-		for(int i = 0; i < rotated.length; i++) {
-			for(int j = 0; j < rotated[i].length; j++) {
-				assertEquals(rotated[i][j], largeMatrix[i][j]);
-			}
-		}
 		for (int i=0; i < rotated.length; i++) {
 			for (int x=0; x < rotated.length; x++) {
 				assertEquals(rotated.length - 1 - i, rotated[i][x]);
