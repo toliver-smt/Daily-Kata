@@ -1,16 +1,9 @@
 package com.smt.kata.game;
 
-import java.io.BufferedReader;
 // JDK 11.x
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /****************************************************************************
  * <b>Title</b>: VoteCounting.java
@@ -56,31 +49,7 @@ public class VoteCounting {
 	 * @throws IOException If votes can't be loaded
 	 */
 	public List<Candidates> count(int version) throws IOException {
-		List<Integer> voters = new ArrayList<>();
-		Map<Candidates, Integer> votes = new HashMap<>();
-		new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(String.format(RESOURCE, version))))
-			.lines()
-			.map(s -> s.trim().split("\\t"))
-			.map(sArr -> new Object[]{Integer.parseInt(sArr[0]), Candidates.valueOf(sArr[1])})
-			.forEach((data) -> {
-				if(voters.contains(data[0])) {
-						possibleFraudVotes.add((Integer) data[0]);
-				} else {
-					voters.add((Integer) data[0]);
-					if(votes.containsKey((Candidates) data[1])) {
-						votes.put((Candidates) data[1], votes.get((Candidates) data[1]) + 1);
-					} else {
-						votes.put((Candidates) data[1], 1);
-					}
-				}
-			});
-		return votes
-				.entrySet()
-				.stream()
-				.sorted(Entry.comparingByValue(Comparator.reverseOrder()))
-				.map(e -> e.getKey())
-				.limit(3)
-				.collect(Collectors.toList());
+		return new ArrayList<>();
 	}
 	
 

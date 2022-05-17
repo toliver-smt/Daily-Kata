@@ -1,12 +1,5 @@
 package com.smt.kata.security;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 /****************************************************************************
  * <b>Title</b>: WeakestRow.java
  * <b>Project</b>: Daily-Kata
@@ -75,44 +68,6 @@ public class WeakestRow {
 	 * @return int array with the row ids of the weakest rows
 	 */
 	public int[] find(int[][] matrix, int k) {
-		if(matrix == null || ArrayUtils.isEmpty(matrix) || matrix[0] == null || ArrayUtils.isEmpty(matrix[0]) || matrix.length < 2) {
-			return new int[0];
-		} else {
-			Map<Integer, List<Integer>> rows = mapData(matrix);
-			return processWeakest(rows, k);
-		}
-	}
-
-	private int[] processWeakest(Map<Integer, List<Integer>> rows, int k) {
-		int [] weakest = new int[k];
-		int index = 0;
-		for(List<Integer> indexes : rows.values()) {
-			for(int i : indexes) {
-				if(index < k) {
-					weakest[index++] = i;
-				} else {
-					return weakest;
-				}
-			}
-		}
-		return weakest;
-	}
-
-	private Map<Integer, List<Integer>> mapData(int[][] matrix) {
-		Map<Integer, List<Integer>> rows = new TreeMap<>();
-		for(int i = 0; i < matrix.length; i++) {
-			int count = 0;
-			for(int j = 0; j < matrix[i].length; j++) {
-				if(matrix[i][j] == 1) {
-					count++;
-				} else {
-					break;
-				}
-			}
-			List<Integer> indexes = rows.getOrDefault(count, new ArrayList<>());
-			indexes.add(i);
-			rows.put(count, indexes);
-		}
-		return rows;
+		return matrix[0];
 	}
 }

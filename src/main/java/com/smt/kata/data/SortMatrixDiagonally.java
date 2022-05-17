@@ -1,16 +1,5 @@
 package com.smt.kata.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 /****************************************************************************
  * <b>Title</b>: SortMatrixDiagonally.java
  * <b>Project</b>: SMT-Kata
@@ -58,33 +47,6 @@ public class SortMatrixDiagonally {
 	 * @return A sorted matrix
 	 */
 	public int[][] sort(int[][] matrix) {
-		if(matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
-			return new int[0][0];
-		}
-		if(matrix.length == 1) {
-			Arrays.sort(matrix[0]);
-		} else {
-			Queue<Integer> diags = new LinkedList<>();
-			diags.addAll(Arrays.stream(matrix).flatMapToInt(Arrays::stream).mapToObj(i -> i).sorted().collect(Collectors.toList()));
-			matrix = new int[matrix.length][matrix[0].length];
-			populateMatrix(matrix, diags);
-			
-		}
 		return matrix;
-	}
-
-	private void populateMatrix(int[][] matrix, Queue<Integer> diags) {
-		for(int i = matrix.length - 1; i >= 0; i--) {
-			populateData(matrix, i, 0, diags);
-		}
-		for(int i = 1; i < matrix[0].length; i++) {
-			populateData(matrix, 0, i, diags);
-		}
-	}
-
-	private void populateData(int[][] matrix, int row, int col, Queue<Integer> diag) {
-		for(int i = row, j = col; i < matrix.length && j < matrix[i].length;) {
-			matrix[i++][j++] = diag.poll();
-		}
 	}
 }

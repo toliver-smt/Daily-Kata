@@ -2,10 +2,7 @@ package com.smt.kata.distance;
 
 // JDK 11.x
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 /****************************************************************************
  * <b>Title</b>: IntersectingArrays.java
@@ -52,31 +49,7 @@ public class IntersectingArrays {
 	 * @return Array of the intersected values
 	 */
 	public Integer[] intersectNoCollections(Integer[] one, Integer[] two) {
-		if(ArrayUtils.isEmpty(one) || ArrayUtils.isEmpty(two)) {
-			return new Integer[0];
-		}
-		Integer[] matches = new Integer [Math.min(one.length, two.length)];
-		int pos = 0;
-		for(int i = 0; i < one.length; i++) {
-			for(int j = 0; j < two.length; j++) {
-				if(one[i] == null || two[j] == null) {
-					return new Integer[0];
-				}
-				if(one[i].equals(two[j])) {
-					matches[pos++] = two[j];
-					two[j] = Integer.MAX_VALUE;
-					break;
-				}
-			}
-		}
-		Integer[] res = new Integer[pos];
-		pos = 0;
-		for(Integer i : matches) {
-			if(i != null) {
-				res[pos++] = i;
-			}
-		}
-		return res;
+		return two;
 	}
 	
 	/**
@@ -86,26 +59,6 @@ public class IntersectingArrays {
 	 * @return Collection of the intersected values
 	 */
 	public List<Integer> intersectWithCollections(Integer[] one, Integer[] two) {
-		List<Integer> union = new ArrayList<>();
-		if(ArrayUtils.isEmpty(one) || ArrayUtils.isEmpty(two)) {
-			return union;
-		}
-
-		List<Integer> oneList = Arrays.asList(one);
-		List<Integer> twoList = new ArrayList<>();
-		twoList.addAll(Arrays.asList(two));
-		if(twoList.contains(null)) {
-			return union;
-		}
-		for(Integer i : oneList) {
-			if(i == null) {
-				return new ArrayList<>();
-			}
-			if(twoList.contains(i)) {
-				union.add(i);
-				twoList.remove(i);
-			}
-		}
-		return union;
+		return new ArrayList<>();
 	}
 }

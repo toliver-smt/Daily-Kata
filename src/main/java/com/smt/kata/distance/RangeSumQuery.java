@@ -1,11 +1,7 @@
 package com.smt.kata.distance;
 
-import java.util.HashMap;
-import java.util.HashSet;
 // JDK 11.x
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 // Kata Libs
 import com.smt.kata.distance.bean.Rectangle;
@@ -60,53 +56,7 @@ public class RangeSumQuery {
 	 * @return Sum of all cells inside the rectangles
 	 */
 	public int sumRange(List<Rectangle> areas) {
-		int sum = 0;
-		if(matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0 || areas == null || areas.isEmpty()) {
-			return sum;
-		} else {
-			Map<Integer, Set<Integer>> points = buildMap();
-			for(Rectangle r : areas) {
-				if(r.getTopLeft() == null || r.getBottomRight() == null) {
-					return 0;
-				} if(isValid(r)) {
-					sum += calculateSum(points, r);
-				}
-			}
-		}
-		return sum;
-	}
-
-	private int calculateSum(Map<Integer, Set<Integer>> points, Rectangle r) {
-		int sum = 0;
-		for(int i = r.getTopLeft().getRow(); i <= r.getBottomRight().getRow() && i < matrix.length; i++) {
-			for(int j = r.getTopLeft().getColumn(); j <= r.getBottomRight().getColumn() && j < matrix[i].length; j++) {
-				if(points.get(i).contains(j)) {
-					sum += matrix[i][j];
-					points.get(i).remove(j);
-				} else {
-					System.out.println("overlap");
-				}
-			}
-		}
-		return sum;
-	}
-
-	private boolean isValid(Rectangle r) {
-		boolean tl = r.getTopLeft().getRow() >= 0 && r.getTopLeft().getRow() < matrix.length && r.getTopLeft().getColumn() >= 0 && r.getTopLeft().getColumn() < matrix[0].length;
-		boolean br = r.getBottomRight().getRow() > r.getTopLeft().getRow() && r.getBottomRight().getRow() <= matrix.length && r.getBottomRight().getColumn() > r.getTopLeft().getColumn() && r.getBottomRight().getColumn() <= matrix[0].length;
-		return tl && br;
-	}
-
-	private Map<Integer, Set<Integer>> buildMap() {
-		Map<Integer, Set<Integer>> valid = new HashMap<>();
-		for(int i = 0; i < matrix.length; i++) {
-			Set<Integer> cols = new HashSet<>();
-			for(int j = 0; j < matrix[i].length; j++) {
-				cols.add(j);
-			}
-			valid.put(i, cols);
-		}
-		return valid;
+		return areas.size();
 	}
 
 }

@@ -1,13 +1,5 @@
 package com.smt.kata.math;
 
-import java.math.BigInteger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-
-import org.apache.commons.lang3.StringUtils;
-
-
 /****************************************************************************
  * <b>Title</b>: FactorialTrailingZeros.java
  * <b>Project</b>: Daily-Kata
@@ -50,7 +42,6 @@ public class FactorialTrailingZeros {
 	 * @return Number of trailing zeros.
 	 */
 	public int calculate(int n) {
-	    Matcher matcher = Pattern.compile("[123456789]").matcher(StringUtils.reverse(IntStream.range(1, n <= 104 ? n+1 : 0).mapToObj(i -> BigInteger.valueOf(i)).reduce(BigInteger.ONE, BigInteger::multiply).toString()));
-	    return matcher.find() ? matcher.start() : 0;
+		return n;
 	}
 }

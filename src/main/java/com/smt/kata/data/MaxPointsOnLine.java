@@ -1,12 +1,5 @@
 package com.smt.kata.data;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import com.smt.kata.distance.bean.CoordinateVO;
-
 /****************************************************************************
  * <b>Title</b>: MaxPointsOnLine.java
  * <b>Project</b>: SMT-Kata
@@ -49,64 +42,6 @@ public class MaxPointsOnLine {
 	 * @return Max points in any straight line (vertical, horizontal and diagonal)
 	 */
 	public int findMax(int[][] points) {
-		int maxPoints = 0;
-		if(!ArrayUtils.isEmpty(points)) {
-			Set<CoordinateVO> coords = convertToSet(points);
-			if(coords.isEmpty()) {
-				maxPoints = 0;
-			} else {
-				for(CoordinateVO c : coords) {
-					maxPoints = Math.max(checkVert(c, coords), maxPoints);
-					maxPoints = Math.max(checkHoriz(c, coords), maxPoints);
-					maxPoints = Math.max(checkDiag(c, coords, 1), maxPoints);
-					maxPoints = Math.max(checkDiag(c, coords, -1), maxPoints);
-				}
-			}
-		}
-		return maxPoints;
-	}
-
-	private int checkDiag(CoordinateVO origin, Set<CoordinateVO> coords, int slope) {
-		int dCount = 0;
-		for(CoordinateVO c : coords) {
-			if(!c.equals(origin) && origin.getColumn() != c.getColumn() && origin.getRow() != c.getRow() && (double)(origin.getColumn() - c.getColumn()) / (double)(origin.getRow() - c.getRow()) == slope) {
-				if(dCount == 0) dCount++;
-				dCount++;
-			}
-		}
-		return dCount;
-	}
-
-	private int checkVert(CoordinateVO origin, Set<CoordinateVO> coords) {
-		int vertCount = 0;
-		for(CoordinateVO c : coords) {
-			if(!c.equals(origin) && origin.getColumn() == c.getColumn()) {
-				if(vertCount == 0) vertCount++;
-				vertCount++;
-			}
-		}
-		return vertCount;
-	}
-
-	private int checkHoriz(CoordinateVO origin, Set<CoordinateVO> coords) {
-		int hCount = 0;
-		for(CoordinateVO c : coords) {
-			if(hCount == 0) hCount++;
-
-			if(!c.equals(origin) && origin.getRow() == c.getRow()) {
-				hCount++;
-			}
-		}
-		return hCount;
-	}
-
-	private Set<CoordinateVO> convertToSet(int[][] points) {
-		Set<CoordinateVO> coords = new HashSet<>();
-		for(int[] line : points) {
-			if(line != null && line.length == 2) {
-				coords.add(new CoordinateVO(line[0], line[1]));
-			}
-		}
-		return coords;
+		return points.length;
 	}
 }

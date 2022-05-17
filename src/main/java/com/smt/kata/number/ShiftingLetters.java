@@ -1,8 +1,5 @@
 package com.smt.kata.number;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-
 /****************************************************************************
  * <b>Title</b>: ShiftingLetters.java
  * <b>Project</b>: SMT-Kata
@@ -56,18 +53,8 @@ public class ShiftingLetters {
 	 * @return Transformed string.  Returns source if data is invalid
 	 */
 	public String transform(String source, int[] shifts) {
-		if (ArrayUtils.isNotEmpty(shifts) && StringUtils.isNotEmpty(source) && !source.matches("^.*[^a-zA-Z].*$")) {
-			char[] src = source.toLowerCase().toCharArray();
-			for(int i = 0, j = i; i < shifts.length && j <= i; j++) {
-				src[j] += shifts[i];
-				if(src[j] > 'z') src[j] -= 26;
-				if(j == i) {
-					i++;
-					j = -1;
-				}
-			}
-			source = new String(src);
-		}
 		return source;
+		
 	}
+
 }
