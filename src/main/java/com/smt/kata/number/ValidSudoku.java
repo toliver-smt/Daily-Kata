@@ -1,10 +1,5 @@
 package com.smt.kata.number;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 /****************************************************************************
  * <b>Title</b>: ValidSudoku.java
  * <b>Project</b>: SMT-Kata
@@ -71,48 +66,6 @@ public class ValidSudoku {
 	 * @return True if the values are valid.  False otherwise
 	 */
 	public boolean isValid(String[][] board) {
-		if(!isValidBoard(board)) {
-			return false;
-		} else if (!isValidRowsAndCols(board)) {
-			return false;
-		} else {
-			for(int i = 0; i < 3; i++) {
-				for(int j = 0; j < 3; j++) {
-					if(!validateRange(i*3, i*3+3, j*3, j*3+3, board)) {
-						return false;
-					} 
-				}
-			}
-		}
-		return true;
-	}
-
-	private boolean validateRange(int startX, int endX, int startY, int endY, String[][] board) {
-		Set<String> nums = new HashSet<>();
-		for(int i = startX; i < board.length && i < endX; i++) {
-			for(int j = startY; j < board[i].length && j < endY; j++) {
-				if(!board[i][j].equals(".") && nums.contains(board[i][j])) {
-					return false;
-				}
-				else {
-					nums.add(board[i][j]);
-				}
-			}
-		}
-		return true;
-	}
-
-	private boolean isValidRowsAndCols(String[][] board) {
-		Set<String> nums = new HashSet<>();
-		for(int i = 0; i < board.length; i++) {
-			if(!validateRange(0, board.length, i, i, board) || !validateRange(i,i, 0, board.length, board)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean isValidBoard(String[][] board) {
-		return board != null && board.length == 9;
+		return board == null;
 	}
 }

@@ -33,14 +33,6 @@ class MinimumAsciiDeleteTest {
 	 * Test method for {@link com.smt.kata.data.MinimumAsciiDelete#getMinumumValue(java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	void testGetMinumumValueNull() throws Exception {
-		assertEquals(0, mad.getMinumumValue(null, null));
-	}
-	
-	/**
-	 * Test method for {@link com.smt.kata.data.MinimumAsciiDelete#getMinumumValue(java.lang.String, java.lang.String)}.
-	 */
-	@Test
 	void testGetMinumumValueOneEmpty() throws Exception {
 		assertEquals(532, mad.getMinumumValue("hello", ""));
 	}

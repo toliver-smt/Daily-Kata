@@ -1,7 +1,5 @@
 package com.smt.kata.code;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 /****************************************************************************
  * <b>Title</b>: OneThreeTwoPattern.java
  * <b>Project</b>: SMT-Kata
@@ -20,8 +18,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * Example 2:
  * Input: nums = [3,1,4,2]
  * Output: 2
- * Explanation: There is a 132 pattern in the sequence: [1, 4, 2], [3, 4, 2].sa  ,km.l
- * 
+ * Explanation: There is a 132 pattern in the sequence: [1, 4, 2], [3, 4, 2].
  * 
  * Example 3:
  * Input: nums = [-1,3,2,0]
@@ -50,19 +47,6 @@ public class OneThreeTwoPattern {
 	 * @return Number of 123 patterns in the data
 	 */
 	public int getTotal(int[] values) {
-		int total = 0;
-		if(ArrayUtils.isNotEmpty(values) && values.length > 2) {
-			for(int k = 2; k < values.length; k++) {
-				for(int j = k - 1; j >= 0; j--) {
-					if(values[j] > values[k]) {
-						for(int i = j - 1; i >= 0; i--) {
-							if(values[i] < values[j])
-								total++;
-						}
-					}
-				}
-			}
-		}
-		return total;
+		return values.length;
 	}
 }

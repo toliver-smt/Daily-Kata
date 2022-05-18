@@ -179,20 +179,4 @@ class MaximalRectangleTest {
 		
 		assertEquals(5, mr.calculate(matrix));
 	}
-	
-	/**
-     * Test method for {@link com.smt.kata.distance.MaximalRectangle#calculate(int[][])}.
-     */
-    @Test
-    void testCalculateDiagonal() throws Exception {
-        int[][] matrix = new int[][] {
-            {1,0,0,0,0},
-            {1,1,0,0,0},
-            {1,1,1,0,0},
-            {1,1,1,1,0},
-            {1,1,1,1,1}
-        };
-        
-        assertEquals(9, mr.calculate(matrix));
-    }
 }

@@ -1,8 +1,5 @@
 package com.smt.kata.distance;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-
 /****************************************************************************
  * <b>Title</b>: SkylineView.java
  * <b>Project</b>: SMT-Kata
@@ -32,43 +29,22 @@ import org.apache.commons.lang3.StringUtils;
  ****************************************************************************/
 public class SkylineView {
 
+	/**
+	 * Gets the number of views working from the back of the array to forward
+	 * @param buildings Array of building heights
+	 * @return Number of buildings with a view
+	 */
 	public int getNumViewsBackwards(int[] buildings) {
-        if (badInput(buildings)) return 0;
-        
-        var max = 0;
-        var count = 0;
-        for (var i = buildings.length - 1; i >= 0; --i) 
-            if (buildings[i] > max) { 
-                ++count;
-                max = buildings[i];
-            }
+		return buildings.length;
+	}
+	
+	/**
+	 * Gets the number of views working from the front of the array to the back
+	 * @param buildings Array of building heights
+	 * @return Number of buildings with a view
+	 */
+	public int getNumViewsForward(int[] buildings) {
+		return buildings.length;
+	}
 
-        return count;
-    }
-    
-    /**
-     * Gets the number of views working from the front of the array to the back
-     * @param buildings Array of building heights
-     * @return Number of buildings with a view
-     */
-    public int getNumViewsForward(int[] buildings) {
-        if (badInput(buildings)) return 0;    
-        
-        var count = 0;
-        boolean biggest;
-        for (var i = 0; i < buildings.length; ++i) {
-            biggest = true;
-            for (var j = i + 1; j < buildings.length; ++j)
-                if (buildings[i] <= buildings[j])
-                    biggest = false;
-            if (biggest) 
-                ++count;
-        }
-
-        return count;
-    }
-    
-    private boolean badInput(int[] buildings) {
-        return ArrayUtils.isEmpty(buildings);
-    }
 }

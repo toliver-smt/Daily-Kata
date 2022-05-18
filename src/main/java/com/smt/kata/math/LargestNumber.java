@@ -49,10 +49,6 @@ public class LargestNumber {
 	 * empty or null
 	 */
 	public String find(int[] values) {
-		return Arrays
-			.stream(values)
-		    .mapToObj(Integer::toString)
-			.sorted((a,b) -> (b+a).compareTo(a+b))
-			.reduce("", String::concat);
+		return Arrays.toString(values);
 	}
 }

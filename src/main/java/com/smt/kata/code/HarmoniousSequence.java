@@ -1,12 +1,5 @@
 package com.smt.kata.code;
 
-import java.util.Arrays;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 /****************************************************************************
  * <b>Title</b>: HarmoniousSequence.java
  * <b>Project</b>: SMT-Kata
@@ -53,39 +46,7 @@ public class HarmoniousSequence {
 	 * @param sequence Numbers to use to calculate
 	 * @return total items in the harmonious sequence
 	 */
-//	public int getLongest(int[] sequence) {
-//		int len = 0;
-//		if(!ArrayUtils.isEmpty(sequence) && sequence.length >= 2) {
-//			for(int i = 0; i < sequence.length; i++) {
-//				int start = sequence[i];
-//				for(int j = i + 1; j < sequence.length; j++) {
-//					int diff = sequence[j];
-//					if(Math.abs(start - diff) == 1) {
-//						int tLen = 2;
-//						for(int k = j + 1; k < sequence.length; k++) {
-//							if(sequence[k] == start || sequence[k] == diff) {
-//								tLen++;
-//							}
-//						}
-//						len = Math.max(tLen, len);
-//					}
-//				}
-//			}
-//		}
-//		return len;
-//	}
 	public int getLongest(int[] sequence) {
-		int len = 0;
-		if(!ArrayUtils.isEmpty(sequence) && sequence.length >= 2) {
-			TreeMap<Integer, Long> counts = new TreeMap<>(Arrays.stream(sequence).boxed().collect(Collectors.groupingBy(e -> e, Collectors.counting())));
-			Integer i = null;
-			for(Entry<Integer, Long> e : counts.entrySet()) {
-				if(i != null && Math.abs(i - e.getKey()) == 1) {
-					len = Math.max(len, (int)(counts.get(i) + e.getValue()));
-				}
-				i = e.getKey();
-			}
-		}
-		return len;
+		return sequence.length;
 	}
 }

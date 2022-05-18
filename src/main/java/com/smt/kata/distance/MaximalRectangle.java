@@ -1,7 +1,5 @@
 package com.smt.kata.distance;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 /****************************************************************************
  * <b>Title</b>: MaximalRectangle.java
  * <b>Project</b>: SMT-Kata
@@ -53,51 +51,6 @@ public class MaximalRectangle {
 	 * @return Count of all of the "1"s in the rectangle
 	 */
 	public int calculate(int[][] matrix) {
-		int max = 0;
-
-		if(ArrayUtils.isNotEmpty(matrix) && ArrayUtils.isNotEmpty(matrix[0])) {
-			for(int i = 0; i < matrix.length; i++) {
-				for(int j = 0; j < matrix[i].length; j++) {
-					if(matrix[i][j] == 1 && (checkBox(matrix, i+1, j) || checkBox(matrix, i, j+1))) {
-						int calc = checkRect(matrix, i, j);
-						max = Math.max(calc, max);
-					} else if(matrix[i][j] == 1 && max == 0) {
-						max = 1;
-					}
-				}
-			}
-		}
-		return max;
+		return matrix.length;
 	}
-
-	private boolean checkBox(int[][] matrix, int i, int j) {
-		return i < matrix.length && j < matrix[i].length && matrix[i][j] == 1;
-	}
-
-	private int checkRect(int[][] matrix, int i, int j) {
-		int right = 1; int down = 1;
-		while(checkBox(matrix, i + down, j)) {
-			down++;
-		}
-		while(checkBox(matrix, i, j + (right))) {
-			right++;
-		}
-		while(checkSum(matrix, i, j, right, down) != right * down) {
-			down--;
-		}
-		return right * down;
-	}
-
-	private int checkSum(int[][] matrix, int i, int j, int right, int down) {
-		int sum = 0;
-		for(int x = i; x < i + down; x++) {
-			for(int y = j; y < right+j; y++) {
-				if(matrix[x][y] == 1) {
-					sum++;
-				}
-			}
-		}
-		return sum;
-	}
-	
 }

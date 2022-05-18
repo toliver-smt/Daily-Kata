@@ -1,10 +1,5 @@
 package com.smt.kata.code;
 
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 /****************************************************************************
  * <b>Title</b>: ToeplitzMatrix.java
  * <b>Project</b>: SMT-Kata
@@ -48,26 +43,7 @@ public class ToeplitzMatrix {
 	 * @return True if its a toeplitz.  False otherwise
 	 */
 	public boolean isToeplitz(int[][] matrix) {
-		return ArrayUtils.isNotEmpty(matrix) &&
-			Stream.concat(IntStream
-					.range(0, matrix.length - 1)
-					.map(i -> ArrayUtils.isNotEmpty(matrix[i]) && checkToeplitz(i, 0, matrix) ? 0 : 1)
-					.boxed(),
-					IntStream
-					.range(0, matrix[0].length - 1)
-					.map(i -> ArrayUtils.isNotEmpty(matrix[0]) && checkToeplitz(0, i, matrix) ? 0 : 1)
-					.boxed()
-					)
-			.reduce(Integer::sum).orElse(0) == 0;
-	}
-
-	private boolean checkToeplitz(int row, int col, int[][] matrix) {
-		int val = matrix[row][col];
-		while(row < matrix.length - 1 && matrix[row] != null && col < matrix[row].length - 1) {
-			if(val != matrix[row++][col++]) {
-				return false;
-			}
-		}
-		return true;
+		
+		return matrix == null;
 	}
 }

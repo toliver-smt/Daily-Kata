@@ -1,7 +1,5 @@
 package com.smt.kata.number;
 
-import org.apache.commons.lang3.StringUtils;
-
 /****************************************************************************
  * <b>Title</b>: AdditiveNumber.java
  * <b>Project</b>: SMT-Kata
@@ -50,42 +48,6 @@ public class AdditiveNumber {
 	 * @return True if additive, false otherwise
 	 */
 	public boolean isAdditive(String sequence) {
-		boolean isAdditive = false;
-		if(!StringUtils.isEmpty(sequence) && sequence.matches("[0123456789]+")) {
-			for(int i = 1; i< sequence.length() / 2 + 1 && !isAdditive; i++) {
-				 String seq1 = sequence.substring(0, i);
-				 for(int j = i + 1; j < sequence.length(); j++) {
-					 String seq2 = sequence.substring(i, j);
-					 if(isValid(seq1) && isValid(seq2)) {
-						 int sum = Integer.parseInt(seq1) + Integer.parseInt(seq2);
-						 String rem = sequence.substring(j);
-						 if(rem.equals(Integer.toString(sum)) || (rem.startsWith(Integer.toString(sum)) && isAdditive(rem, Integer.parseInt(seq2)))) {
-							 isAdditive = true;
-							 break;
-						 }
-					 }
-				 }
-			}
-		}
-		return isAdditive;
-	}
-
-	private boolean isAdditive(String sequence, int sum) {
-		boolean isAdditive = false;
-		for(int i = 1; i< sequence.length() / 2 + 1 && !isAdditive; i++) {
-			 String seq1 = sequence.substring(0, i);
-			 int s1 = Integer.parseInt(seq1);
-			 String rem = sequence.substring(i);
-			 if(rem.equals(Integer.toString(sum + s1))) {
-				 isAdditive = true;
-			 } else if(isValid(seq1) && rem.startsWith(Integer.toString(s1 + sum))) {
-				 isAdditive = isAdditive(rem, (s1));
-			 }
-		}
-		return isAdditive;
-	}
-
-	private boolean isValid(String seq) {
-		return !seq.startsWith("0");
+		return sequence == null;
 	}
 }

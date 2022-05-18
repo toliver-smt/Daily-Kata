@@ -1,11 +1,5 @@
 package com.smt.kata.code;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 /****************************************************************************
  * <b>Title</b>: FlippingMatrix.java
  * <b>Project</b>: SMT-Kata
@@ -48,36 +42,12 @@ import org.apache.commons.lang3.ArrayUtils;
  ****************************************************************************/
 public class FlippingMatrix {
 
-	int [][] matrix;
 	/**
 	 * Calculates the sum of the binaries for the matrix with as many moves as needed
 	 * @param matrix Matrix to calculate against
 	 * @return Sum of the binary values for each row
 	 */
 	public int calculate(int[][] matrix) {
-		return ArrayUtils.isNotEmpty(this.matrix = matrix) && ArrayUtils.isNotEmpty(this.matrix[0]) && checkValid() ? makeMax() : 0;
-	}
-
-	private int makeMax() {
-		///Flip Rows
-		IntStream.range(0, matrix.length).filter(i -> matrix[i][0] == 0).forEach(i -> invertRow(i));
-
-		///Flip Columns
-		IntStream.range(1, matrix[0].length).filter(i -> IntStream.range(0, matrix.length).map(j -> matrix[j][i]).sum() < matrix[0].length / 2).forEach(i -> invertCol(i));		
-
-		///Return Binary sum. 
-		return Arrays.stream(matrix).mapToInt(r -> Integer.parseInt(Arrays.stream(r).boxed().map(i -> i.toString()).collect(Collectors.joining("")), 2)).sum();
-	}
-
-	private void invertCol(int colNum) {
-		IntStream.range(0, matrix.length).forEach(i -> matrix[i][colNum] = matrix[i][colNum] == 0 ? 1 : 0);
-	}
-
-	private void invertRow(int rowNum) {
-		IntStream.range(0, matrix[rowNum].length).forEach(i -> matrix[rowNum][i] = matrix[rowNum][i] == 0 ? 1 : 0);
-	}
-
-	private boolean checkValid() {
-		return Arrays.stream(matrix).filter(r -> r == null || r.length != matrix[0].length).count() == 0 && Arrays.stream(matrix).flatMapToInt(x -> Arrays.stream(x)).filter(i -> i != 0 && i != 1).count() == 0;  
+		return matrix.length;
 	}
 }

@@ -1,7 +1,5 @@
 package com.smt.kata.distance;
 
-import java.util.stream.IntStream;
-
 /****************************************************************************
  * <b>Title</b>: MinimumMovesEqual.java
  * <b>Project</b>: SMT-Kata
@@ -40,14 +38,6 @@ public class MinimumMovesEqual {
 	 * @return Number of moves to make equal
 	 */
 	public int calculate(int[] elements) {
-		if(elements == null || elements.length < 2) {
-			return 0;
-		}
-		int avg = (int)IntStream.of(elements).average().getAsDouble();
-		int count = 0;
-		for(int i : elements) {
-			count += Math.abs(avg - i);
-		}
-		return count;
+		return elements.length;
 	}
 }
