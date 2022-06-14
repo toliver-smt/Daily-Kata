@@ -1,7 +1,5 @@
 package com.smt.kata.lexical;
 
-import com.siliconmtn.data.text.StringUtil;
-
 /**
  * Part one of a series designed to help design a lexical Analyzer, this Kata focuses on performing string validation before any analysis occurs.
  * 
