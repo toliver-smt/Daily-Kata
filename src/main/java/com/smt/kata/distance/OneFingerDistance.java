@@ -1,4 +1,6 @@
 package com.smt.kata.distance;
+import java.util.*;
+import java.lang.Math;
 
 /****************************************************************************
  * <b>Title:</b> OneFingerDistance.java
@@ -34,6 +36,21 @@ public class OneFingerDistance {
 	 * @return distance between the letters
 	 */
 	public int calculate(String word) {
-		return word.length();
+		//validate
+		if(word == null || !word.matches("[a-zA-Z]+")) return 0;
+		
+		//create a string of the alphabet and convert word to an all lower case array
+		String alphabetString = "abcdefghijklmnopqrstuvwxyz";
+		String[] myWord = word.toLowerCase().split("");
+		
+		//compare values and add the difference between index's
+		int myVal = 0;
+		for (int i=0; i<word.length() - 1; i++) {
+			if (!myWord[i+1].equals(myWord[i])) {
+				myVal += Math.abs(alphabetString.indexOf((myWord[i+1])) - (alphabetString.indexOf(myWord[i])) - 1);
+				System.out.println(i + " : " + myWord[i] + myWord[i+1]);
+			}
+		}
+		return myVal;
 	}
 }

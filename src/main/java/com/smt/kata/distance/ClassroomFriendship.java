@@ -39,7 +39,11 @@ import java.util.Map;
  * @updates:
  ****************************************************************************/
 public class ClassroomFriendship {
-
+	Map<Integer, List<Integer>> friends = {0: [1, 2], 1: [0, 5], 2: [0], 3: [6], 4: [], 5: [1], 6: [3]};
+	public static void main(String[] args) {
+		ClassroomFriendship x = new ClassroomFriendship();
+		x.countGroups( {0: [1, 2], 1: [0, 5], 2: [0], 3: [6], 4: [], 5: [1], 6: [3]});
+	}
 	/**
 	 * Counts the groups of friends
 	 * @param friends friend assignments
