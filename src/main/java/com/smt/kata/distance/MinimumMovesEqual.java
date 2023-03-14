@@ -38,6 +38,31 @@ public class MinimumMovesEqual {
 	 * @return Number of moves to make equal
 	 */
 	public int calculate(int[] elements) {
-		return elements.length;
+		
+		//validate
+		if (elements == null || elements.length <= 1) return 0;
+		
+		//calculate the average value
+		int sum = 0;
+		for (int element : elements) {
+			sum += element;
+		}
+		int avg = sum/elements.length;
+		
+		//round the number so we have a whole integer to iterate towards
+		avg = Math.round(avg);
+		
+		//add the difference between element and avg to result
+		int result = 0;
+		for (int element : elements) {
+			int currentMove = element - avg;
+			//handle negatives and numbers smaller than avg
+			if (currentMove < 0) {
+				result += Math.abs(currentMove);
+			} else {
+				result += currentMove;
+			}
+		}
+		return result;
 	}
 }

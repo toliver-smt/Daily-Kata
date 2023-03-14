@@ -1,6 +1,4 @@
 package com.smt.kata.distance;
-import java.util.*;
-import java.lang.Math;
 
 /****************************************************************************
  * <b>Title:</b> OneFingerDistance.java
@@ -28,6 +26,9 @@ import java.lang.Math;
  * <b>updates:</b>
  * 
  ****************************************************************************/
+import java.util.*;
+import java.lang.Math;
+
 public class OneFingerDistance {
 
 	/**
