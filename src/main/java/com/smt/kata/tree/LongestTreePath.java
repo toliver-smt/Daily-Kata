@@ -44,7 +44,9 @@ public class LongestTreePath {
 	 * @return Sum of the weights from each node in the path
 	 */
 	public int caclculatePath(List<KataNode<Integer>> nodes) {
-		
+		for (int i=0; i<nodes.size(); i++) {
+			System.out.print(nodes.get(i));
+		}
 		return nodes.size();
 	}
 
