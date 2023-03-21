@@ -58,6 +58,19 @@ public class StringHalves {
 	 * @return True if the numbers match.  False otherwise;
 	 */
 	public boolean calculate(String s) {
-		return s.length() == 0;
+		if(s == null || s.isEmpty() || s.length()%2 != 0) return false;
+		String a = s.substring(0, s.length()/2).toLowerCase();
+		String b = s.substring(s.length()/2).toLowerCase();
+		int aCount = 0;
+		int bCount = 0;
+		for (int i=0; i<s.length()/2; i++) {
+			if(a.charAt(i) == 'a' || a.charAt(i) == 'e' || a.charAt(i) == 'i' || a.charAt(i) == 'o' || a.charAt(i) == 'u') {
+				aCount++;
+			}
+			if(b.charAt(i) == 'a' || b.charAt(i) == 'e' || b.charAt(i) == 'i' || b.charAt(i) == 'o' || b.charAt(i) == 'u') {
+				bCount++;
+			}
+		}
+		return aCount == bCount;
 	}
 }

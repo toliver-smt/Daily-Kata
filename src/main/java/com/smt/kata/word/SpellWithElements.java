@@ -61,7 +61,14 @@ public class SpellWithElements {
 	 * @return Collection of lists of the matching patterns
 	 */
 	public List<List<String>> findPatterns(String source) {
-		return new ArrayList<>();
+		ArrayList<String> Result = new ArrayList<String>();
+		String myString[] = source.split("");
+		for (int i=0; i<source.length(); i++) {
+			if (elements.containsKey(source.charAt(i))) {
+				Result.add(source.charAt(i));
+			}
+		}
+		return Result;
 	}
 	
 	/**

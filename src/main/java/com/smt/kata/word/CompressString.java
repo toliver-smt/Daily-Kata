@@ -21,7 +21,26 @@ public class CompressString {
 	 * @return
 	 */
 	public String compress(String val){
-		return val + "";
+		String myString = "";
+		int c = 1;
+		int j;
+		for (int i=0; i<val.length(); i++) {
+			j = i + 1;
+			if (val.charAt(i) == val.charAt(j)) {
+				c++;
+			} else if (c > 2) {
+				myString = myString + val.charAt(i) + c;
+				val = val.substring(j);
+				c = 1;
+				System.out.println("location 1 " + val + " " + i);
+			} else {
+				myString = myString + val.charAt(i);
+				val = val.substring(j);
+				c = 1;
+				System.out.println("location 2 " + val + " " + i);
+			}
+		}
+		System.out.println(myString);
+		return myString;
 	}
-
 }
