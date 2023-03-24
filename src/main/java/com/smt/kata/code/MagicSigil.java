@@ -31,7 +31,26 @@ public class MagicSigil {
 	 * @return
 	 */
 	public String sigilize(String word) {
-		return word + "";
+		if(word == null || word.isEmpty()) return "";
+		word = word.toUpperCase();
+		word = word.replace(" ", "");
+		word = word.replace("A", "");
+		word = word.replace("E", "");
+		word = word.replace("I", "");
+		word = word.replace("O", "");
+		word = word.replace("U", "");
+		System.out.println(word);
+		StringBuilder sb = new StringBuilder(word);
+		System.out.println(sb);
+		for (int i=0; i<sb.length(); i++) {
+			for (int j=i+1; j<sb.length(); j++) {
+				if (sb.charAt(i) == sb.charAt(j)) {
+					sb.deleteCharAt(i);
+				}
+			}
+		}
+		String result = sb.toString();
+		return result;
 	}
 
 }
