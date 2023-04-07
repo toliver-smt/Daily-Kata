@@ -32,6 +32,24 @@ public class CircularArray {
 	 * @return Collection of words reordered.  Empty list if not possible
 	 */
 	public List<String> create(String[] words) {
-		return new ArrayList<>();
+		List<String> result = new ArrayList<String>();
+		//validate
+		if (words == null) return result;
+		char firstChar;
+		char lastChar;
+		String firstWord = words[0];
+		for (int i=0; i<words.length; i++) {
+			for (int j=i+1; j<words.length; j++) {
+				lastChar = words[i].charAt(words[i].length() - 1);	
+				firstChar = words[j].charAt(0);
+				
+				if (lastChar == firstChar) {
+					result.add(words[i]);
+					i++;
+					j=i+1;
+				}
+			}
+		}
+		return result;
 	}
 }
