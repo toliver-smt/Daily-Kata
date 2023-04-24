@@ -86,4 +86,16 @@ class SingleRecurrenceTest {
 		assertTrue(vals.contains(4));
 		assertTrue(vals.contains(5));
 	}
+	
+    
+    /**
+     * Test method for {@link com.smt.kata.number.SingleRecurrence#find(int[])}.
+     */
+    @Test
+    void testFindExampleThree() throws Exception {
+        List<Integer> vals = Arrays.stream(sr.find(new int[] {1,2,3,4,5,1,2,3,5,6})).boxed().collect(Collectors.toList());
+        assertTrue(vals.size() == 2);
+        assertTrue(vals.contains(4));
+        assertTrue(vals.contains(6));
+    }
 }

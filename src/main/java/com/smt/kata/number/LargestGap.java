@@ -1,5 +1,8 @@
 package com.smt.kata.number;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /****************************************************************************
  * <b>Title</b>: LargestGap.java
  * <b>Project</b>: SMT-Kata
@@ -27,7 +30,28 @@ public class LargestGap {
 	 * @return
 	 */
 	public int largestGap(int[] arr) {
-		return arr.length;
+		for (int i=0; i<arr.length - 1; i++) {
+			for (int j=i+1; j<arr.length; j++) {
+				if (arr[i] > arr[j]) {
+					int first = arr[i];
+					int second = arr[j];
+					arr[i] = second;
+					arr[j] = first;
+				}
+			}
+		}
+		
+		int longestGap = 0;
+		for (int i=0; i<arr.length - 1; i++) {
+			int j = i+1;
+			int max = Math.max(Math.abs(arr[i]), Math.abs(arr[j]));
+			int min = Math.min(Math.abs(arr[i]), Math.abs(arr[j]));
+			if ((max-min) > longestGap) {
+				longestGap = (max-min);
+			}
+		}
+		
+		return longestGap;
 	}
 
 }

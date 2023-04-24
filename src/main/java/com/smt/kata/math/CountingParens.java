@@ -32,6 +32,31 @@ public class CountingParens {
 	 * @return
 	 */
 	public int calculate(String parens) {
-		return parens.length();
+		//validate
+		if (parens == null) return 0;
+		
+		//define counter
+		int parensCount = 0;
+		//has an open parenthesis been found?
+		boolean openParens = false;
+		
+		for (int i=0; i<parens.length(); i++) {
+			if (parens.charAt(i) == '(') {
+				//If it is an openParen, increment parensCount
+				//and make openParens true
+				parensCount++;
+				openParens = true;
+			} else if (parens.charAt(i) == ')' & openParens == false) {
+				//If it is a closedParen, and no openParens have been iterated
+				//through yet, increment parensCount
+				parensCount++;
+			} else if (parens.charAt(i) == ')') {
+				//If it is a closedParen, decrement parensCount
+				parensCount--;
+			}
+		}
+		
+		//return absolute value of parensCount
+		return Math.abs(parensCount);
 	}
 }

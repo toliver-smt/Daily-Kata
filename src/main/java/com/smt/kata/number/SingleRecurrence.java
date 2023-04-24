@@ -1,5 +1,8 @@
 package com.smt.kata.number;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 /****************************************************************************
  * <b>Title</b>: SingleRecurrence.java
  * <b>Project</b>: SMT-Kata
@@ -30,7 +33,9 @@ public class SingleRecurrence {
 	 * @return Only values with a single occurrence.  Empty int[] if none found
 	 */
 	public int[] find(int[] values) {
-		return new int[] {};
+		return ((values == null || 
+				Arrays.stream(values).distinct().count() != 2)
+				? new int[0] : Arrays.stream(values).distinct().toArray());
 	}
 
 }

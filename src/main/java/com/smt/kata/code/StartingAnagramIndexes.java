@@ -2,6 +2,7 @@ package com.smt.kata.code;
 
 // JDK 11.x
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /****************************************************************************
@@ -31,6 +32,31 @@ public class StartingAnagramIndexes {
 	 * @return Collection of the matching indexes
 	 */
 	public List<Integer> find(String word, String phrase) {
-		return new ArrayList<>();		
+		//Create ArrayList result
+		List<Integer> result = new ArrayList<>();
+		
+		//Validate
+		if (word == null || phrase == null || word.isEmpty()) return result;
+		
+		//Convert both arguments to lower case
+		word = word.toLowerCase();
+		phrase = phrase.toLowerCase();
+		
+		//Sort word and assign it to a new variable
+		char[] sortedWordArray = word.toCharArray();
+		Arrays.sort(sortedWordArray);
+		String sortedWord = new String(sortedWordArray);
+		
+		for (int i=0; i<phrase.length()-word.length()+1; i++) {
+			//Create a temporary phrase from the overall phrase to compare
+			char[] tempPhrase = phrase.substring(i, i+word.length()).toCharArray();
+			//Sort tempPhrase
+			Arrays.sort(tempPhrase);
+			//If tempPhrase is equal to sortedWord add the index to result
+			if (sortedWord.equals(new String(tempPhrase))) {
+				result.add(i);
+			}
+		}
+		return result;		
 	}
 }

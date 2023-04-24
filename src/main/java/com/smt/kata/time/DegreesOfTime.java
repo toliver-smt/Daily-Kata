@@ -32,7 +32,26 @@ public class DegreesOfTime {
 	 * @return difference in degrees between the minute and hour hand.  0 if invalid data
 	 */
 	public int calculate(String time) {
-		return time.length();
+		//validate
+        if (time == null || time.isEmpty() || !time.matches("[0-9]?[0-9]:[0-9][0-9]")) return 0;
+		
+		//Convert time to String array
+		String[] timeArr = time.split(":");
+		
+		//Declare and initialize hour
+		int hour = Integer.parseInt(timeArr[0]);
+		//If hour is greater than 12, subtract 12 from it
+		if (hour > 12) {
+			hour = hour - 12;
+		}
+		//Determine the angle from hour to 12
+		int hourAngle = hour * 30;
+		//Declare and initialize min
+		int min = Integer.parseInt(timeArr[1]);
+		//Determine the angle from min to 12
+		int minAngle = min * 6;
+		//Return the difference
+		return Math.abs(hourAngle - minAngle);
 	}
 
 }

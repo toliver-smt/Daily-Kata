@@ -48,6 +48,10 @@ public class ReduceXZero {
 	 * @return Minimum number of moves to match the sum
 	 */
 	public int minOperations(int[] nums, int x) {
+		StringBuilder sb = new StringBuilder();
+		for (int element : nums) {
+			sb.append(element);
+		}
 		return x;
 	}
 }
